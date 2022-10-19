@@ -8,7 +8,7 @@ import datetime
 
 app = Flask(__name__)
 app.app_context().push()
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEYS')
 Bootstrap(app)
 
 
@@ -18,7 +18,6 @@ def home():
     form = TimeInput()
     if request.method == "POST":
         date = form.date.data
-        print(date)
         new_date = date.isocalendar()
         week = new_date[1]
 
@@ -44,8 +43,9 @@ def home():
                 "week": week
             }
         }
-        endpoint = os.environ.get("SHEETY_ENDPOINT")
+        endpoint = os.environ.get('SHEETY_ENDPOINT')
         response = requests.post(url=endpoint, json=sheety_params)
+        print(response)
         return redirect(url_for('success'))
     return render_template("index.html", form=form)
 
