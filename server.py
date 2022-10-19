@@ -51,7 +51,7 @@ def home():
 
 @app.route('/success')
 def success():
-    render_template('success.html')
+    return render_template('success.html')
 
 
 
