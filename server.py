@@ -46,8 +46,13 @@ def home():
         }
         endpoint = os.environ.get("SHEETY_ENDPOINT")
         response = requests.post(url=endpoint, json=sheety_params)
-        print(response)
+        return redirect(url_for('success'))
     return render_template("index.html", form=form)
+
+@app.route('/success')
+def success():
+    render_template('success.html')
+
 
 
 if __name__ == "__main__":
