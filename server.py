@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash, abort
+from flask import Flask, render_template, redirect, url_for, flash, abort, request
 from flask_bootstrap import Bootstrap
 import os
 from forms import TimeInput
@@ -16,7 +16,7 @@ Bootstrap(app)
 @app.route('/', methods=['GET', 'POST'])
 def home():
     form = TimeInput()
-    if form.validate_on_submit():
+    if request.method == "POST":
         date = form.date.data
         print(date)
         new_date = date.isocalendar()
