@@ -4,13 +4,13 @@ import os
 from forms import TimeInput
 import requests
 import datetime
-from flask_wtf.csrf import CSRFProtect
+
 
 app = Flask(__name__)
 app.app_context().push()
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 Bootstrap(app)
-csrf = CSRFProtect(app)
+
 
 
 @app.route('/', methods=['GET', 'POST'])
