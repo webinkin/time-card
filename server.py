@@ -1,8 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, flash, abort
 from flask_bootstrap import Bootstrap
-from datetime import date
-from flask_sqlalchemy import SQLAlchemy
-from functools import wraps
 import os
 from forms import TimeInput
 import requests
@@ -10,7 +7,7 @@ import datetime
 
 app = Flask(__name__)
 app.app_context().push()
-app.config['SECRET_KEY'] = SECRET_KEY
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 Bootstrap(app)
 
 
@@ -45,7 +42,7 @@ def home():
                 "week": week
             }
         }
-        endpoint = "SHEETY_ENDPOINT"
+        endpoint = os.environ.get("SHEETY_ENDPOINT")
         response = requests.post(url=endpoint, json=sheety_params)
         print(response)
     return render_template("index.html", form=form)
